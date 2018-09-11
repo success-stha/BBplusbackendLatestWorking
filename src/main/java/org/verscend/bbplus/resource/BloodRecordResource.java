@@ -58,4 +58,11 @@ List<Map<String, Object>> dateBasedRecord(@PathVariable String fromDate, @PathVa
 List<Map<String, Object>> filtered = bloodRecordRepository.dateBasedRecord(fromDate, toDate);
 return filtered;
 }
+
+@GetMapping("request/{bloodType}/{pint}")
+public void deleteInDummy(@PathVariable String bloodType, @PathVariable long pint) {
+	bloodRecordRepository.deleteInDummy(bloodType, pint);
+
+} 
+
 }

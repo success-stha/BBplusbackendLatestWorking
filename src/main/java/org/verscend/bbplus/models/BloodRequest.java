@@ -11,30 +11,31 @@ import javax.persistence.OneToOne;
 public class BloodRequest {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long bloodreqestId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer bloodRequestId;
 	@OneToOne
-	@JoinColumn(name="bloodGroupId")
+	@JoinColumn(name = "bloodGroupId")
 	private BloodGroup bloodGroup;
 	private long pint;
+	private boolean status;
 
 	public BloodRequest() {
-
 	}
 
-	public BloodRequest(Long bloodreqestId, BloodGroup bloodGroup, long pint) {
+	public BloodRequest(Integer bloodRequestId, BloodGroup bloodGroup, long pint, boolean status) {
 		super();
-		this.bloodreqestId = bloodreqestId;
+		this.bloodRequestId = bloodRequestId;
 		this.bloodGroup = bloodGroup;
 		this.pint = pint;
+		this.status = status;
 	}
 
-	public Long getBloodreqestId() {
-		return bloodreqestId;
+	public Integer getBloodRequestId() {
+		return bloodRequestId;
 	}
 
-	public void setBloodreqestId(Long bloodreqestId) {
-		this.bloodreqestId = bloodreqestId;
+	public void setBloodRequestId(Integer bloodRequestId) {
+		this.bloodRequestId = bloodRequestId;
 	}
 
 	public BloodGroup getBloodGroup() {
@@ -51,6 +52,14 @@ public class BloodRequest {
 
 	public void setPint(long pint) {
 		this.pint = pint;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }

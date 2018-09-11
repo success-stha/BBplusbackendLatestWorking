@@ -19,4 +19,7 @@ public interface BloodRecordRepository extends CrudRepository<BloodRecord, Integ
 + " where entry_date between ?1 and ?2 group by blood_type", nativeQuery = true)
 List<Map<String, Object>> dateBasedRecord(String fromDate, String toDate);
 
+@Query(value="update dummy set sum=sum-?2 where blood_type=?1", nativeQuery=true)
+void deleteInDummy(String bloodType, long pint); 
+
 }

@@ -21,9 +21,7 @@ public class BloodGroupResource {
 			List<BloodGroup> bloodTypeList = new ArrayList<>();
 			bloodGroupRepository.findAll().forEach(bloodTypeList::add);
 			return bloodTypeList;
-
-		}
-
+			}
 	}
 
 	
