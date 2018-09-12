@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.verscend.bbplus.models.BloodCount;
 import org.verscend.bbplus.models.BloodGroup;
 import org.verscend.bbplus.models.BloodRequest;
+import org.verscend.bbplus.repository.BloodCountRepository;
 import org.verscend.bbplus.repository.BloodGroupRepository;
 import org.verscend.bbplus.repository.BloodRequestRepository;
 
@@ -28,6 +30,9 @@ public class BloodRequestResource {
 
 	@Autowired
 	BloodGroupRepository bloodGroupRepository;
+
+	@Autowired
+	BloodCountRepository bloodCountRepository;
 
 	@PostMapping("saveBloodRequest")
 	public void save(@RequestBody Map<String, String> record) {
@@ -59,4 +64,13 @@ public class BloodRequestResource {
 		bloodRequestRepository.save(bloodRequest);
 	}
 
+	@PostMapping("approve")
+	public void approveRequest(@RequestBody BloodRequest bloodRequest){
+		BloodGroup bloodGroup = new BloodGroup();
+		bloodGroup.setBloodGroupId((bloodRequest.getBloodRequestId()));
+		BloodCount bloodCount = this.bloodCountRepository.findByBloodGroup(bloodGroup);
+		int count = bloodCount.getCounter() -  (int) bloodRequest.getPint();
+		bloodCount.setCounter(count);
+		this.bloodCountRepository.save(bloodCount);
+	}
 }
