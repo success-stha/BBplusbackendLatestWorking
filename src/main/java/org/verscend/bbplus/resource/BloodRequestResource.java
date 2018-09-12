@@ -73,4 +73,17 @@ public class BloodRequestResource {
 		bloodCount.setCounter(count);
 		this.bloodCountRepository.save(bloodCount);
 	}
+	
+	@GetMapping("getBloodCount")
+	public List<BloodCount> getBloodCount()
+	{
+		return bloodCountRepository.getBloodCount();
+	
+	}
+	
+	
+	
+	
+	
+	
 }
