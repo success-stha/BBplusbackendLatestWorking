@@ -9,12 +9,8 @@ import org.verscend.bbplus.models.BloodGroup;
 
 public interface BloodCountRepository extends CrudRepository<BloodCount, Long> {
     BloodCount findByBloodGroup(BloodGroup bloodGroup);
-
-    
+   
     @Query(value="Select * from Blood_Count", nativeQuery=true)
     public List<BloodCount> getBloodCount();
-    
-    
-    
     
 }

@@ -14,6 +14,7 @@ public class BloodCount implements Serializable {
     private Integer counter;
 
     @OneToOne
+    @JoinColumn(name="bloodGroupId")
     private BloodGroup bloodGroup;
 
     public Long getId() {

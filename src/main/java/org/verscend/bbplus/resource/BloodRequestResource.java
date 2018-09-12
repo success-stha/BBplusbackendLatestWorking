@@ -65,13 +65,20 @@ public class BloodRequestResource {
 	}
 
 	@PostMapping("approve")
-	public void approveRequest(@RequestBody BloodRequest bloodRequest){
-		BloodGroup bloodGroup = new BloodGroup();
-		bloodGroup.setBloodGroupId((bloodRequest.getBloodRequestId()));
-		BloodCount bloodCount = this.bloodCountRepository.findByBloodGroup(bloodGroup);
-		int count = bloodCount.getCounter() -  (int) bloodRequest.getPint();
-		bloodCount.setCounter(count);
-		this.bloodCountRepository.save(bloodCount);
+	public String approveRequest(@RequestBody BloodRequest bloodRequest){
+	BloodGroup bloodGroup = new BloodGroup();
+	bloodGroup.setBloodGroupId((bloodRequest.getBloodGroup().getBloodGroupId()));
+	BloodCount bloodCount = this.bloodCountRepository.findByBloodGroup(bloodGroup);
+	if (bloodCount != null){
+	int count = bloodCount.getCounter() -  (int) bloodRequest.getPint();
+	bloodCount.setCounter(count);
+	this.bloodCountRepository.save(bloodCount);
+	}else{
+	return "blood not available. please add blood";
+	}
+
+
+	return "Approved";
 	}
 	
 	@GetMapping("getBloodCount")

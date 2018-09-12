@@ -3,6 +3,7 @@ package org.verscend.bbplus.resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -62,6 +63,11 @@ public class UserResource {
 	@PutMapping("updateUser")
 	public void updateUser(@RequestBody User user) {
 		userRepository.save(user);
+	}
+	
+	@GetMapping("users/{id}")
+	public Optional<User> findUser(@PathVariable Long id) {
+		return userRepository.findById(id);
 	}
 
 }
